@@ -5,6 +5,7 @@ let editingIndex = null;
 // Load tasks from backend on page load
 document.addEventListener("DOMContentLoaded", () => {
   loadTasksFromServer();
+  showTodayDate();
 });
 
 // loads task from server
@@ -29,11 +30,14 @@ const addTask = async () => {
   if (isEditing && editingIndex !== null) {
     // Edit existing task
     try {
-      const res = await fetch(`http://localhost:5000/api/tasks/${tasks[editingIndex]._id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ text }),
-      });
+      const res = await fetch(
+        `http://localhost:5000/api/tasks/${tasks[editingIndex]._id}`,
+        {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ text }),
+        }
+      );
       const updatedTask = await res.json();
       tasks[editingIndex] = updatedTask;
     } catch (err) {
@@ -111,7 +115,9 @@ const updateStats = () => {
   const progressBar = document.getElementById("progress");
 
   progressBar.style.width = `${progress}%`;
-  document.getElementById("numbers").innerText = `${completeTasks} / ${totalTasks}`;
+  document.getElementById(
+    "numbers"
+  ).innerText = `${completeTasks} / ${totalTasks}`;
 };
 
 //update task UI
@@ -124,10 +130,12 @@ const updateTasksList = () => {
 
     listItem.innerHTML = `
       <div class="taskItem">
-        <div class="task ${task.completed ? "completed" : ""}">
-          <input type="checkbox" class="checkbox" ${task.completed ? "checked" : ""} />
+        <label class="task ${task.completed ? "completed" : ""}">
+          <input type="checkbox" class="checkbox" ${
+            task.completed ? "checked" : ""
+          } />
           <p>${task.text}</p>
-        </div>
+        </label>
         <div class="icons">
           <img src="./img/edit.png" alt="Edit" onClick="editTask(${index})" />
           <img src="./img/bin.png" alt="Delete" onClick="deleteTask(${index})" />
@@ -143,6 +151,19 @@ const updateTasksList = () => {
     taskList.appendChild(listItem);
   });
 };
+
+function showTodayDate() {
+  const today = new Date();
+  const options = {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  };
+  const formattedDate = today.toLocaleDateString("en-US", options);
+
+  document.getElementById("todayDate").innerText = formattedDate;
+}
 
 //add task button
 document.getElementById("newTask").addEventListener("click", (e) => {

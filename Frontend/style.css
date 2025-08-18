@@ -1,148 +1,298 @@
-:root {
-  --background: #d0f0dc;
-  --secondaryBackground: #e6f4ec;
-  --text: #1f3b2c;
-  --accent: #4caf50;
-  --accentLight: #a5d6a7;
-  --white: #ffffff;
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
+
+* {
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-  background-color: var(--background);
-  color: var(--text);
-  font-family: "Segoe UI", sans-serif;
-}
-
-.container {
+  background: url(../bg.jpeg) no-repeat center center/cover;
+  min-height: 100vh;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  margin: 120px auto 0 auto;
-  max-width: 500px;
+  align-items: center;
+  font-family: "Poppins", sans-serif;
+  position: relative;
 }
-
-.stats-container {
-  background-color: var(--white);
-  border: 2px solid var(--accentLight);
-  border-radius: 16px;
-  padding: 30px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  display: flex;
-  gap: 50px;
+body::before {
+  content: "";
+  position: absolute;
   width: 100%;
-  justify-content: space-between;
+  height: 100%;
+  backdrop-filter: blur(15px);
+  background: rgba(0, 0, 0, 0.15);
+  z-index: 0;
+}
+.container {
+  background: rgba(156, 230, 138, 0.15);
+  border-radius: 20px;
+  padding: 30px;
+  width: 360px;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  text-align: center;
+  z-index: 999;
 }
 
 .details h1 {
-  color: var(--accent);
-  margin-bottom: 10px;
+  font-size: 22px;
+  color: white;
+  margin-bottom: 5px;
 }
 
-#progress {
-  width: 0%;
-  height: 10px;
-  background-color: var(--accent);
-  border-radius: 10px;
-  transition: all 0.3s ease;
+.details p {
+  color: #eee;
+  font-size: 14px;
+  margin-bottom: 15px;
 }
+
+#todayDate {
+  font-size: 13px;
+  color: #ddd;
+  margin-bottom: 20px;
+}
+
 #progressBar {
   width: 100%;
-  height: 10px;
-  background-color: var(--accentLight);
-  border-radius: 10px;
-  margin-top: 20px;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  overflow: hidden;
+  margin: 15px 0;
 }
+#progress {
+  height: 8px;
+  background: #4caf50;
+  border-radius: 20px;
+  transition: width 0.3s ease;
+}
+
+/* Stats bubble */
 #numbers {
-  width: 80px;
-  height: 80px;
-  background-color: var(--accent);
-  color: var(--white);
+  margin: 15px auto;
+  width: 70px;
+  height: 70px;
+  background: #4caf50;
+  color: white;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 24px;
   font-weight: bold;
 }
 
 form {
-  margin-top: 60px;
-  width: 100%;
+  margin-top: 20px;
   display: flex;
   gap: 10px;
 }
 
 input {
   flex: 1;
-  padding: 14px;
-  background-color: var(--secondaryBackground);
-  border: 2px solid var(--accentLight);
-  border-radius: 10px;
+  padding: 12px;
+  border-radius: 12px;
+  border: none;
   outline: none;
-  color: var(--text);
-  font-size: 16px;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+input::placeholder {
+  color: #bbb;
 }
 
 button {
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: var(--accent);
-  color: var(--white);
-  font-size: 24px;
-  font-weight: bold;
   border: none;
+  background: #4caf50;
+  color: white;
+  font-size: 20px;
   cursor: pointer;
+  transition: 0.3s ease;
 }
-
+button:hover {
+  background: #ffff;
+  color: #4caf50;
+}
 #taskList {
+  margin-top: 20px;
+  /* margin-left: -30px; */
   display: flex;
   flex-direction: column;
   gap: 10px;
-  margin-top: 30px;
-  width: 100%;
+  list-style: none;
 }
 
 .taskItem {
-  background-color: var(--white);
-  border: 1px solid var(--accentLight);
-  border-radius: 10px;
-  padding: 10px 15px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  margin-top: 5px;
+  /* margin-left: -10px; */
+  padding: 12px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  color: white;
 }
 
 .task {
   display: flex;
   align-items: center;
-  gap: 10px;
+  justify-content: center;
 }
 
-.task input {
-  width: 18px;
-  height: 18px;
-}
-
-.taskItem img {
-  width: 22px;
-  height: 22px;
-  cursor: pointer;
-  opacity: 0.7;
-  transition: 0.2s ease;
-}
-
-.taskItem img:hover {
-  opacity: 1;
-  transform: scale(1.1);
+.task p {
+  margin-left: 15px;
 }
 
 .completed p {
   text-decoration: line-through;
-  color: var(--accent);
+  color: #4caf50;
+}
+
+.icons {
+  font-size: 10px;
+  display: flex;
+  gap: 10px;
+}
+
+.task input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 15px;
+  height: 15px;
+  border: 2px solid #4caf50;
+  border-radius: 6px;
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.2s ease;
+  background: transparent;
+}
+
+.task input[type="checkbox"]:hover {
+  box-shadow: 0 0 5px rgba(76, 175, 80, 0.6);
+}
+
+.task input[type="checkbox"]:checked {
+  background-color: #4caf50;
+  border-color: #4caf50;
+}
+
+.task input[type="checkbox"]:checked::after {
+  content: "";
+  position: absolute;
+  left: 8px;
+  top: 0px;
+  width: 7px;
+  height: 18px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+/* mobile */
+.container {
+  width: 90%;
+  max-width: 360px;
+  padding: 20px;
+}
+
+.details h1 {
+  font-size: 20px;
+}
+
+.details p {
+  font-size: 13px;
+}
+
+.taskItem {
+  padding: 10px;
+  font-size: 14px;
+}
+
+.task p {
+  font-size: 14px;
+}
+
+/* Tablets */
+@media (min-width: 600px) {
+  .container {
+    max-width: 420px;
+    padding: 25px;
+  }
+
+  .details h1 {
+    font-size: 24px;
+  }
+
+  .task p {
+    font-size: 15px;
+  }
+
+  .task input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+/* Desktops */
+@media (min-width: 1024px) {
+  .container {
+    max-width: 500px;
+    padding: 30px;
+  }
+
+  .details h1 {
+    font-size: 26px;
+  }
+
+  .taskItem {
+    padding: 14px;
+  }
+
+  .task p {
+    font-size: 16px;
+  }
+
+  .task input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+/* 📱 Responsive Adjustments */
+@media (max-width: 480px) {
+  input {
+    font-size: 13px;
+    padding: 10px 12px;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  button {
+    width: 30px;
+    height: 45px;
+    border-radius: 10px;
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 768px) {
+  input {
+    font-size: 15px;
+    padding: 14px 16px;
+  }
+
+  button {
+    width: 55px;
+    height: 55px;
+    font-size: 24px;
+  }
 }
